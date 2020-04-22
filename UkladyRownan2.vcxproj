@@ -18,6 +18,22 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Macierz.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\UkladRownanLiniowych.cpp" />
+    <ClCompile Include="src\Wektor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\Macierz.hh" />
+    <ClInclude Include="inc\rozmiar.h" />
+    <ClInclude Include="inc\UkladRownanLiniowych.hh" />
+    <ClInclude Include="inc\Wektor.hh" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
+    <None Include="rownania.dat" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{5B30784C-ADD4-43AC-8C94-E4D1EFA2AEC1}</ProjectGuid>
@@ -146,9 +162,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="UkladyRownan2.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
