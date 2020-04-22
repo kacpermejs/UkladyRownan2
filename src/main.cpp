@@ -21,10 +21,10 @@ int main()
 {
 using namespace std;
 
-    UkladRownanLiniowych   UklRown;   // To tylko przykladowe definicje zmiennej
-    Wektor WekRozwiazan;
-    Wektor WekBledow;
-    MacierzKw MacUkladu;
+    UkladRownanLiniowych<double, ROZMIAR>   UklRown;   // To tylko przykladowe definicje zmiennej
+    Wektor<double, 3> WekRozwiazan;
+    Wektor<double, 3> WekBledow;
+    MacierzKw<double, 3> MacUkladu;
 
     cin >> UklRown;
     UklRown.zwroc_macierz().transponuj();

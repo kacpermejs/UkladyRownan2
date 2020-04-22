@@ -1,6 +1,7 @@
 #include "UkladRownanLiniowych.hh"
 
-UkladRownanLiniowych::UkladRownanLiniowych()
+template<typename Typ, int Rozmiar>
+UkladRownanLiniowych<Typ, Rozmiar>::UkladRownanLiniowych()
 {
     MacierzKw AA;
     Wektor BB;
@@ -9,24 +10,25 @@ UkladRownanLiniowych::UkladRownanLiniowych()
     this->B=BB;
 }
 
-UkladRownanLiniowych::UkladRownanLiniowych(MacierzKw AA, Wektor BB)
+template<typename Typ, int Rozmiar>
+UkladRownanLiniowych<Typ, Rozmiar>::UkladRownanLiniowych(MacierzKw<Typ, Rozmiar> AA, Wektor<Typ, Rozmiar> BB)
 {
     this->A=AA;
     this->B=BB;
 }
 
-
-Wektor UkladRownanLiniowych::oblicz()
+template<typename Typ, int Rozmiar>
+Wektor<Typ, Rozmiar> UkladRownanLiniowych<Typ, Rozmiar>::oblicz()
 {
-    Wektor Wynik;
-    Wektor WektorZerowy;
+    Wektor Wynik<Typ, Rozmiar>;
+    Wektor WektorZerowy<Typ, Rozmiar>;
 
     MacierzKw Temp=this->A;
 
     double det=this->A.wyznacznik(GAUSS);
     Wektor detx;
 
-    for(int i=0; i<ROZMIAR; i++)
+    for(int i=0; i<Rozmiar; i++)
     {
         Temp=this->A;
         Temp[i]=this->B;
@@ -46,17 +48,17 @@ Wektor UkladRownanLiniowych::oblicz()
 }
 
 
-
-std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych &UklRown)
+template<typename Typ, int Rozmiar>
+std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<Typ, Rozmiar> &UklRown)
 {
     Strm >> UklRown.zwroc_macierz() >> UklRown.zwroc_wektor();
 
     return Strm;
 }
 
-
+template<typename Typ, int Rozmiar>
 std::ostream& operator << ( std::ostream                  &Strm,
-                            const UkladRownanLiniowych    &UklRown
+                            const UkladRownanLiniowych<Typ, Rozmiar>    &UklRown
                           )
 {
     char znakRownosci;
@@ -64,10 +66,10 @@ std::ostream& operator << ( std::ostream                  &Strm,
     MacierzKw Mac1=UklRown.macierz();
 
 
-    for(int i=0; i<ROZMIAR; i++)
+    for(int i=0; i<Rozmiar; i++)
     {
 
-        if(i==ROZMIAR/2)
+        if(i==Rozmiar/2)
             znakRownosci='=';
         else
             znakRownosci=' ';
@@ -79,3 +81,5 @@ std::ostream& operator << ( std::ostream                  &Strm,
 
     return Strm;
 }
+
+template class UkladRownanLiniowych<double, ROZMIAR>;
