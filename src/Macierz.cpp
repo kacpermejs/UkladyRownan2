@@ -20,7 +20,7 @@ MacierzKw::MacierzKw(Wektor A, Wektor B, Wektor C)
     this->Tab[2] = C;
 }
 
-double MacierzKw::wyznacznikSarrus() //tylko dla 3x3
+const double MacierzKw::wyznacznikSarrus() //tylko dla 3x3
 {
     assert(ROZMIAR==3);
     double Wynik;
@@ -37,14 +37,14 @@ double MacierzKw::wyznacznikSarrus() //tylko dla 3x3
 }
 
 
-double MacierzKw::wyznacznikLaplace()
+const double MacierzKw::wyznacznikLaplace()
 {
     return 0; //nie działa bo nie działa rekurencja z szablonami.
               //Proba implementacji na dole w komentarzu.
 }
 
 
-double MacierzKw::wyznacznikGauss()
+const double MacierzKw::wyznacznikGauss()
 {
     double det = 1;
     MacierzKw Temp=(*this);
@@ -78,7 +78,7 @@ double MacierzKw::wyznacznikGauss()
 }
 
 
-double MacierzKw::wyznacznik(metoda met)
+const double MacierzKw::wyznacznik(metoda met)
 {
     switch(met)
     {

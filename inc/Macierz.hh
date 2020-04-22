@@ -26,10 +26,10 @@ public:
     MacierzKw(const Wektor Tab[]);
     MacierzKw(Wektor A, Wektor B, Wektor C);
 
-    double wyznacznikLaplace();// rozwiniecje laplace'a, gaussa, sarrusa
-    double wyznacznikGauss();
-    double wyznacznikSarrus();
-    double wyznacznik(metoda met);
+    const double wyznacznikLaplace();// rozwiniecje laplace'a, gaussa, sarrusa
+    const double wyznacznikGauss();
+    const double wyznacznikSarrus();
+    const double wyznacznik(metoda met);
 
     const MacierzKw transponowana() const;
     void transponuj();
