@@ -19,8 +19,8 @@ class Wektor {
     public:
 
     Wektor<Typ, Rozmiar>();
-    template<typename Typ, int Rozmiar>
-    Wektor(double x, double y, double z);
+
+    Wektor<Typ, Rozmiar>(double x, double y, double z);
     //Wektor<Typ, Rozmiar>(Typ x,Typ y, Typ z);
     Wektor<Typ, Rozmiar>(Typ tablica[]);
 

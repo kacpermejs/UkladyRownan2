@@ -18,7 +18,7 @@ public:
     const MacierzKw<Typ, Rozmiar> & macierz() const { return this->A; }
     void zmien_macierz(MacierzKw<Typ, Rozmiar> MM) { this->A=MM; }
     /*analogicznie dla wektora */
-    Wektor<Typ, Rozmiar> & zwroc_Wektor() { return this->B; }
+    Wektor<Typ, Rozmiar> & zwroc_wektor() { return this->B; }
     const Wektor<Typ, Rozmiar> & wektor() const { return this->B; }
     void zmien_Wektor(Wektor<Typ, Rozmiar> WW) { this->B=WW; }
 

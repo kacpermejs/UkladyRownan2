@@ -116,4 +116,21 @@ std::ostream& operator << (std::ostream &Strm, const Wektor<Typ, Rozmiar> &Wek)
     return Strm;
 }
 
-template class Wektor<double, ROZMIAR>;
+template class Wektor<double, 1>;
+template class Wektor<double, 2>;
+template class Wektor<double, 3>;
+template class Wektor<double, 4>;
+template class Wektor<double, 5>;
+
+template std::istream& operator >> (std::istream &Strm, Wektor<double, 1> &Wek);
+template std::istream& operator >> (std::istream &Strm, Wektor<double, 2> &Wek);
+template std::istream& operator >> (std::istream &Strm, Wektor<double, 3> &Wek);
+template std::istream& operator >> (std::istream &Strm, Wektor<double, 4> &Wek);
+template std::istream& operator >> (std::istream &Strm, Wektor<double, 5> &Wek);
+
+template std::ostream& operator << (std::ostream &Strm, const Wektor<double, 1> &Wek);
+template std::ostream& operator << (std::ostream &Strm, const Wektor<double, 2> &Wek);
+template std::ostream& operator << (std::ostream &Strm, const Wektor<double, 3> &Wek);
+template std::ostream& operator << (std::ostream &Strm, const Wektor<double, 4> &Wek);
+template std::ostream& operator << (std::ostream &Strm, const Wektor<double, 5> &Wek);
+

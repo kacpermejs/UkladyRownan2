@@ -3,8 +3,8 @@
 template<typename Typ, int Rozmiar>
 UkladRownanLiniowych<Typ, Rozmiar>::UkladRownanLiniowych()
 {
-    MacierzKw AA;
-    Wektor BB;
+    MacierzKw<Typ, Rozmiar> AA;
+    Wektor<Typ, Rozmiar> BB;
 
     this->A=AA;
     this->B=BB;
@@ -20,13 +20,13 @@ UkladRownanLiniowych<Typ, Rozmiar>::UkladRownanLiniowych(MacierzKw<Typ, Rozmiar>
 template<typename Typ, int Rozmiar>
 Wektor<Typ, Rozmiar> UkladRownanLiniowych<Typ, Rozmiar>::oblicz()
 {
-    Wektor Wynik<Typ, Rozmiar>;
-    Wektor WektorZerowy<Typ, Rozmiar>;
+    Wektor<Typ, Rozmiar> Wynik;
+    Wektor<Typ, Rozmiar> WektorZerowy;
 
-    MacierzKw Temp=this->A;
+    MacierzKw<Typ, Rozmiar> Temp=this->A;
 
     double det=this->A.wyznacznik(GAUSS);
-    Wektor detx;
+    Wektor<Typ, Rozmiar> detx;
 
     for(int i=0; i<Rozmiar; i++)
     {
@@ -63,7 +63,7 @@ std::ostream& operator << ( std::ostream                  &Strm,
 {
     char znakRownosci;
 
-    MacierzKw Mac1=UklRown.macierz();
+    MacierzKw<Typ, Rozmiar> Mac1=UklRown.macierz();
 
 
     for(int i=0; i<Rozmiar; i++)
@@ -82,4 +82,20 @@ std::ostream& operator << ( std::ostream                  &Strm,
     return Strm;
 }
 
-template class UkladRownanLiniowych<double, ROZMIAR>;
+template class UkladRownanLiniowych<double, 1>;
+template class UkladRownanLiniowych<double, 2>;
+template class UkladRownanLiniowych<double, 3>;
+template class UkladRownanLiniowych<double, 4>;
+template class UkladRownanLiniowych<double, 5>;
+
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<double, 1> &UklRown);
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<double, 2> &UklRown);
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<double, 3> &UklRown);
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<double, 4> &UklRown);
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<double, 5> &UklRown);
+
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<double, 1> &UklRown);
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<double, 2> &UklRown);
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<double, 3> &UklRown);
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<double, 4> &UklRown);
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<double, 5> &UklRown);

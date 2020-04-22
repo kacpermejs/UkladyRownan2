@@ -181,7 +181,7 @@ const Wektor<Typ, Rozmiar> MacierzKw<Typ, Rozmiar>::zwrocWiersz(int index) const
 template<typename Typ, int Rozmiar>
 Wektor<Typ, Rozmiar> operator*(const MacierzKw<Typ, Rozmiar> & M1, const Wektor<Typ, Rozmiar>& W2)
 {
-    Wektor Wynik;
+    Wektor<Typ, Rozmiar> Wynik;
 
     for(int i=0; i < Rozmiar; i++)
         for(int k=0; k < Rozmiar; k++)
@@ -218,7 +218,29 @@ std::ostream& operator << (std::ostream &Strm, const MacierzKw<Typ, Rozmiar> &Ma
     return Strm;
 }
 
-template class MacierzKw<double, ROZMIAR>;
+template class MacierzKw<double, 1>;
+template class MacierzKw<double, 2>;
+template class MacierzKw<double, 3>;
+template class MacierzKw<double, 4>;
+template class MacierzKw<double, 5>;
+
+template std::istream& operator >> (std::istream &Strm, MacierzKw<double, 1> &Mac);
+template std::istream& operator >> (std::istream &Strm, MacierzKw<double, 2> &Mac);
+template std::istream& operator >> (std::istream &Strm, MacierzKw<double, 3> &Mac);
+template std::istream& operator >> (std::istream &Strm, MacierzKw<double, 4> &Mac);
+template std::istream& operator >> (std::istream &Strm, MacierzKw<double, 5> &Mac);
+
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<double, 1> &Mac);
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<double, 2> &Mac);
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<double, 3> &Mac);
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<double, 4> &Mac);
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<double, 5> &Mac);
+
+template Wektor<double, 1> operator*(const MacierzKw<double, 1> & M1, const Wektor<double, 1>& W2);
+template Wektor<double, 2> operator*(const MacierzKw<double, 2> & M1, const Wektor<double, 2>& W2);
+template Wektor<double, 3> operator*(const MacierzKw<double, 3> & M1, const Wektor<double, 3>& W2);
+template Wektor<double, 4> operator*(const MacierzKw<double, 4> & M1, const Wektor<double, 4>& W2);
+template Wektor<double, 5> operator*(const MacierzKw<double, 5> & M1, const Wektor<double, 5>& W2);
 
 /*
 
