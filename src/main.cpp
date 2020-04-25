@@ -20,7 +20,7 @@
 int main()
 {
 using namespace std;
-
+/*
     UkladRownanLiniowych<double, ROZMIAR>   UklRown;   // To tylko przykladowe definicje zmiennej
     Wektor<double, 3> WekRozwiazan;
     Wektor<double, 3> WekBledow;
@@ -40,7 +40,13 @@ using namespace std;
     << WekBledow << endl;
 
     cout << "Dlugosc wektora bledu:\n"
-    << WekBledow.dlugosc() << endl;
+    << WekBledow.dlugosc() << endl;*/
+
+    MacierzKw<double, 3> Mac1;
+    cin >> Mac1;
+    cout << Mac1.wyznacznik(GAUSS);
+    cout << Mac1.wyznacznik(SARRUS);
+    cout << Mac1.wyznacznik(LAPLACE);
 
 
 
