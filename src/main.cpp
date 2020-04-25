@@ -41,12 +41,14 @@ using namespace std;
 
     cout << "Dlugosc wektora bledu:\n"
     << WekBledow.dlugosc() << endl;*/
+    Wektor<LZespolona, 3> w1;
 
-    MacierzKw<double, 3> Mac1;
-    cin >> Mac1;
-    cout << Mac1.wyznacznik(GAUSS);
-    cout << Mac1.wyznacznik(SARRUS);
-    cout << Mac1.wyznacznik(LAPLACE);
+    cin >> w1;
+
+    cout << w1;
+
+
+
 
 
 

@@ -43,7 +43,7 @@ Wektor<Typ, Rozmiar> & Wektor<Typ, Rozmiar>::operator -= (const Wektor<Typ, Rozm
 }
 
 template<typename Typ, int Rozmiar>
-Wektor<Typ, Rozmiar> & Wektor<Typ, Rozmiar>::operator *= (Typ l)
+Wektor<Typ, Rozmiar> & Wektor<Typ, Rozmiar>::operator *= (double l)
 {
     for(int i=0; i<Rozmiar; i++)
         this->Tab[i]*=l;
@@ -52,7 +52,7 @@ Wektor<Typ, Rozmiar> & Wektor<Typ, Rozmiar>::operator *= (Typ l)
 }
 
 template<typename Typ, int Rozmiar>
-Wektor<Typ, Rozmiar> & Wektor<Typ, Rozmiar>::operator /= (Typ l)
+Wektor<Typ, Rozmiar> & Wektor<Typ, Rozmiar>::operator /= (double l)
 {
     if(l==0)
     {
@@ -64,9 +64,9 @@ Wektor<Typ, Rozmiar> & Wektor<Typ, Rozmiar>::operator /= (Typ l)
 
     return *this;
 }
-
+/*
 template<typename Typ, int Rozmiar>
-Typ Wektor<Typ, Rozmiar>::dlugosc() const //modul
+double Wektor<Typ, Rozmiar>::dlugosc() const //modul
 {
     Typ Wynik=0;
     for(int i=0; i<Rozmiar; i++)
@@ -75,7 +75,7 @@ Typ Wektor<Typ, Rozmiar>::dlugosc() const //modul
     }
 
     return sqrt(Wynik);
-}
+}*/
 
 template<typename Typ, int Rozmiar>
 bool Wektor<Typ, Rozmiar>::operator == (const Wektor<Typ, Rozmiar> & W2) const
@@ -133,4 +133,80 @@ template std::ostream& operator << (std::ostream &Strm, const Wektor<double, 2> 
 template std::ostream& operator << (std::ostream &Strm, const Wektor<double, 3> &Wek);
 template std::ostream& operator << (std::ostream &Strm, const Wektor<double, 4> &Wek);
 template std::ostream& operator << (std::ostream &Strm, const Wektor<double, 5> &Wek);
+
+/*
+template
+double Wektor<LZespolona,5>::dlugosc() const
+{
+
+}*/
+
+template<>
+bool Wektor<LZespolona, 1>::operator == (const Wektor<LZespolona, 1> & W2) const
+{
+    for(int i=0; i<1; i++)
+    {
+        if(this->Tab[i]!=W2.Tab[i] || this->Tab[i]!=W2.Tab[i])
+            return false;
+    }
+    return true;
+}
+template<>
+bool Wektor<LZespolona, 2>::operator == (const Wektor<LZespolona, 2> & W2) const
+{
+    for(int i=0; i<2; i++)
+    {
+        if(this->Tab[i]!=W2.Tab[i] || this->Tab[i]!=W2.Tab[i])
+            return false;
+    }
+    return true;
+}
+template<>
+bool Wektor<LZespolona, 3>::operator == (const Wektor<LZespolona, 3> & W2) const
+{
+    for(int i=0; i<3; i++)
+    {
+        if(this->Tab[i]!=W2.Tab[i] || this->Tab[i]!=W2.Tab[i])
+            return false;
+    }
+    return true;
+}
+template<>
+bool Wektor<LZespolona, 4>::operator == (const Wektor<LZespolona, 4> & W2) const
+{
+    for(int i=0; i<4; i++)
+    {
+        if(this->Tab[i]!=W2.Tab[i] || this->Tab[i]!=W2.Tab[i])
+            return false;
+    }
+    return true;
+}
+template<>
+bool Wektor<LZespolona, 5>::operator == (const Wektor<LZespolona, 5> & W2) const
+{
+    for(int i=0; i<5; i++)
+    {
+        if(this->Tab[i]!=W2.Tab[i] || this->Tab[i]!=W2.Tab[i])
+            return false;
+    }
+    return true;
+}
+
+template class Wektor<LZespolona, 1>;
+template class Wektor<LZespolona, 2>;
+template class Wektor<LZespolona, 3>;
+template class Wektor<LZespolona, 4>;
+template class Wektor<LZespolona, 5>;
+
+template std::istream& operator >> (std::istream &Strm, Wektor<LZespolona, 1> &Wek);
+template std::istream& operator >> (std::istream &Strm, Wektor<LZespolona, 2> &Wek);
+template std::istream& operator >> (std::istream &Strm, Wektor<LZespolona, 3> &Wek);
+template std::istream& operator >> (std::istream &Strm, Wektor<LZespolona, 4> &Wek);
+template std::istream& operator >> (std::istream &Strm, Wektor<LZespolona, 5> &Wek);
+
+template std::ostream& operator << (std::ostream &Strm, const Wektor<LZespolona, 1> &Wek);
+template std::ostream& operator << (std::ostream &Strm, const Wektor<LZespolona, 2> &Wek);
+template std::ostream& operator << (std::ostream &Strm, const Wektor<LZespolona, 3> &Wek);
+template std::ostream& operator << (std::ostream &Strm, const Wektor<LZespolona, 4> &Wek);
+template std::ostream& operator << (std::ostream &Strm, const Wektor<LZespolona, 5> &Wek);
 

@@ -5,6 +5,7 @@
 #include <cassert>
 #include <cmath>
 #include "rozmiar.h"
+#include "LZespolona.hh"
 
 
 /*
@@ -26,17 +27,17 @@ class Wektor {
 
     Wektor<Typ, Rozmiar> & operator += (const Wektor<Typ, Rozmiar> & W2); //W1 += W2  , W1 += W3 += W4
     Wektor<Typ, Rozmiar> & operator -= (const Wektor<Typ, Rozmiar> & W2);
-    Wektor<Typ, Rozmiar> & operator *= (Typ l);
-    Wektor<Typ, Rozmiar> & operator /= (Typ l);
+    Wektor<Typ, Rozmiar> & operator *= (double l);
+    Wektor<Typ, Rozmiar> & operator /= (double l);
 
     Typ operator * (const Wektor<Typ, Rozmiar> & W2) const; //skalarnie
 
     inline const Wektor<Typ, Rozmiar> operator + (const Wektor<Typ, Rozmiar> & W2) const { return Wektor<Typ, Rozmiar>(*this)+=W2; } //W1 + W2
     inline const Wektor<Typ, Rozmiar> operator - (const Wektor<Typ, Rozmiar> & W2) const { return Wektor<Typ, Rozmiar>(*this)-=W2; }
-    inline const Wektor<Typ, Rozmiar> operator * (Typ l) const { return Wektor<Typ, Rozmiar>(*this)*=l; } // W1 * 2
-    inline const Wektor<Typ, Rozmiar> operator / (Typ l) const { return Wektor<Typ, Rozmiar>(*this)/=l; } // W1 / 2
+    inline const Wektor<Typ, Rozmiar> operator * (double l) const { return Wektor<Typ, Rozmiar>(*this)*=l; } // W1 * 2
+    inline const Wektor<Typ, Rozmiar> operator / (double l) const { return Wektor<Typ, Rozmiar>(*this)/=l; } // W1 / 2
 
-    Typ dlugosc() const; //modul
+    //double dlugosc() const; //modul
 
     bool operator == (const Wektor<Typ, Rozmiar> & W2) const;
     bool operator != (const Wektor<Typ, Rozmiar> & W2) const;

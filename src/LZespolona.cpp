@@ -1,145 +1,135 @@
 #include "LZespolona.hh"
 
 
-
-/*!
- * Tworzy nowa liczbe zespolona z podanych liczb.
- *
- *
- */
-
-LZespolona utworz(int rzeczywista, int urojona)
-{
-  LZespolona nowa;
-  nowa.re=rzeczywista;
-  nowa.im=urojona;
-  return nowa;
-}
-
-/*!
+/*!===================================================================================================
  * Realizuje dodanie dwoch liczb zespolonych.
  * Argumenty:
- *    Skl1 - pierwszy skladnik dodawania,
+ *    (*this) - pierwszy skladnik dodawania,
  *    Skl2 - drugi skladnik dodawania.
  * Zwraca:
  *    Sume dwoch skladnikow przekazanych jako parametry.
+ *====================================================================================================
  */
-LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona & LZespolona::operator += (const LZespolona  Skl2)
 {
-  LZespolona  Wynik;
+  (*this).re += Skl2.re;
+  (*this).im += Skl2.im;
 
-  Wynik.re = Skl1.re + Skl2.re;
-  Wynik.im = Skl1.im + Skl2.im;
-
-  return Wynik;
+  return *this;
 }
 
 /*!
  * Reszta funkcji to analogiczne funkcje przeciazajace operatory.
  */
 
-LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona & LZespolona::operator -= (const LZespolona  Skl2)
 {
-  LZespolona  Wynik;
+  (*this).re -= Skl2.re;
+  (*this).im -= Skl2.im;
 
-  Wynik.re = Skl1.re - Skl2.re;
-  Wynik.im = Skl1.im - Skl2.im;
-
-  return Wynik;
+  return *this;
 }
 
-LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona & LZespolona::operator *= (const LZespolona  Skl2)
 {
-  LZespolona  Wynik;
+  LZespolona  Temp=(*this);
 
-  Wynik.re = (Skl1.re * Skl2.re - Skl1.im * Skl2.im);
-  Wynik.im = (Skl1.re * Skl2.im + Skl1.im * Skl2.re);
+  (*this).re = Temp.re * Skl2.re - Temp.im * Skl2.im;
+  (*this).im = Temp.re * Skl2.im + Temp.im * Skl2.re;
 
-  return Wynik;
+  return *this;
 }
 
-LZespolona  operator / (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona & LZespolona::operator /= (const LZespolona  Skl2)
 {
-  LZespolona  Wynik;
+  LZespolona  Temp=(*this);
 
-  Wynik=Skl1*sprz(Skl2)/pow(mod(Skl2), 2);
+  (*this)=Temp*Skl2.sprz()/pow(Skl2.mod(), 2);
 
-  return Wynik;
+  return *this;
 }
+
+/*!==========================================================================
+ * Przeciazenie operatora = ustawiajace czesc rzeczywista na podana liczbe
+ * czesc urojona wtedy jest rowna 0
+ *===========================================================================
+ */
+
+
+LZespolona LZespolona::operator = (double rzeczywista)
+  {
+    this->re = rzeczywista;
+    this->im = 0;
+    return *this;
+  }
+
 //!Funkcja zwraca sprzezenie LZespolonej
-LZespolona sprz(LZespolona Skl1)
+LZespolona LZespolona::sprz() const
 {
   LZespolona Wynik;
 
-  Wynik.re = Skl1.re;
-  Wynik.im = (-1)*Skl1.im;
+  Wynik.re = (*this).re;
+  Wynik.im = (-1)*(*this).im;
 
   return Wynik;
 }
 //!Funkcja zwraca modul LZespolonej
-double mod(LZespolona Skl1)
+double LZespolona::mod() const
 {
   double Wynik;
-  Wynik=sqrt(pow(Skl1.re, 2)+pow(Skl1.im, 2));
+  Wynik=sqrt(pow((*this).re, 2)+pow((*this).im, 2));
   return Wynik;
 }
-/*!
- * Ponizsze funkcje to operacje matematyczne ale ze skladnikiem rzeczywistym typu double
+/*!====================================================================================================================================
+ * Ponizsze funkcje to operatory ale ze skladnikiem rzeczywistym typu double
  */
-LZespolona operator + (LZespolona zesp, double rzeczywista)
+LZespolona LZespolona::operator += (const double rzeczywista)
 {
-  LZespolona  Wynik;
+  (*this).re = (*this).re+rzeczywista;
+  (*this).im = (*this).im;
 
-  Wynik.re = zesp.re+rzeczywista;
-  Wynik.im = zesp.im;
-
-  return Wynik;
+  return *this;
 }
 
-LZespolona operator - (LZespolona zesp, double rzeczywista)
+LZespolona LZespolona::operator -= (const double rzeczywista)
 {
-  LZespolona  Wynik;
+  (*this).re-=rzeczywista;
 
-  Wynik.re = zesp.re-rzeczywista;
-  Wynik.im = zesp.im;
-
-  return Wynik;
+  return *this;
 }
 
-LZespolona operator * (LZespolona zesp, double rzeczywista)
+LZespolona LZespolona::operator *= (const double rzeczywista)
 {
-  LZespolona  Wynik;
+  (*this).re*=rzeczywista;
+  (*this).im*=rzeczywista;
 
-  Wynik.re = zesp.re*rzeczywista;
-  Wynik.im = zesp.im*rzeczywista;
-
-  return Wynik;
+  return *this;
 }
 
-LZespolona operator / (LZespolona zesp, double rzeczywista)
+LZespolona LZespolona::operator /= (const double rzeczywista)
 {
-  LZespolona  Wynik;
   assert(rzeczywista!=0);
-  Wynik.re = zesp.re/rzeczywista;
-  Wynik.im = zesp.im/rzeczywista;
+  (*this).re/=rzeczywista;
+  (*this).im/=rzeczywista;
 
-  return Wynik;
+  return *this;
 }
-
-bool operator == (LZespolona Skl1, LZespolona Skl2)
+//==========================================================================================
+bool LZespolona::operator == (LZespolona Skl2) const
 {
-  if(Skl1.re == Skl2.re && Skl1.im == Skl2.im)
+  if(
+      ( (*this).re + EPSILON == Skl2.re || (*this).re - EPSILON == Skl2.re)
+      &&
+      ( (*this).im + EPSILON == Skl2.im || (*this).im - EPSILON == Skl2.im)
+    )
     return true;
   else
     return false;
 }
 
-bool operator != (LZespolona Skl1, LZespolona Skl2)
+bool LZespolona::operator != (LZespolona Skl2) const
 {
-  if(Skl1.re != Skl2.re && Skl1.im != Skl2.im)
-    return true;
-  else
-    return false;
+  return !((*this)==Skl2);
 }
 /*!
  * Funkcja pobiera i sprawdza poprawnosc formatu odpowiedzi uzyskanej od uzytkownika
@@ -158,7 +148,7 @@ std::istream & operator >> (std::istream & strm, LZespolona & Skl)
   strm>>znak;
   if (znak != '(')
     strm.setstate(std::ios::failbit);
-  strm>>Skl.re>>Skl.im>>znak;
+  strm>>Skl.zwrocRE()>>Skl.zwrocIM()>>znak;
   if (znak != 'i')
     strm.setstate(std::ios::failbit);
   strm>>znak;
@@ -169,7 +159,7 @@ std::istream & operator >> (std::istream & strm, LZespolona & Skl)
 
 std::ostream & operator << (std::ostream & strm, const LZespolona & Skl)
 {
-  strm << '(' << Skl.re << std::showpos << Skl.im << std::noshowpos << "i)";
+  strm << '(' << Skl.zwrocREc() << std::showpos << Skl.zwrocIMc() << std::noshowpos << "i)";
   return strm;
 }
 
