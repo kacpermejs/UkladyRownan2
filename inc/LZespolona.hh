@@ -17,14 +17,20 @@
  * Modeluje pojecie liczby zespolonej
  */
 class LZespolona {
-public:
+
   double re;    /*! Pole repezentuje czesc rzeczywista. */
   double im;    /*! Pole repezentuje czesc urojona. */
 
-//public:
+public:
     LZespolona()
     {
-        this->re=0;
+        this->re = 0;
+        this->im = 0;
+    }
+
+    explicit LZespolona(double rzeczywista)
+    {
+        this->re=rzeczywista;
         this->im=0;
     }
 

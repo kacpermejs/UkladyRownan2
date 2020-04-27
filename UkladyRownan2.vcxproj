@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\LZespolona.cpp" />
     <ClCompile Include="src\Macierz.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\UkladRownanLiniowych.cpp" />
     <ClCompile Include="src\Wektor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\LZespolona.hh" />
     <ClInclude Include="inc\Macierz.hh" />
     <ClInclude Include="inc\rozmiar.h" />
     <ClInclude Include="inc\UkladRownanLiniowych.hh" />
