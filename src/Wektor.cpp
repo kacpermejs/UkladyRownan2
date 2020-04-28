@@ -82,7 +82,7 @@ bool Wektor<Typ, Rozmiar>::operator == (const Wektor<Typ, Rozmiar> & W2) const
 {
     for(int i=0; i<Rozmiar; i++)
     {
-        if((this->Tab[i]+EPSILON)!=W2.Tab[i]||(this->Tab[i]-EPSILON)!=W2.Tab[i])
+        if(std::abs(this->Tab[i]-W2.Tab[i])>EPSILON)
             return false;
     }
     return true;
