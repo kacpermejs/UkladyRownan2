@@ -25,7 +25,7 @@ Wektor<Typ, Rozmiar> UkladRownanLiniowych<Typ, Rozmiar>::oblicz()
 
     MacierzKw<Typ, Rozmiar> Temp=this->A;
 
-    double det=this->A.wyznacznik(GAUSS);
+    Typ det=this->A.wyznacznik(GAUSS);
     Wektor<Typ, Rozmiar> detx;
 
     for(int i=0; i<Rozmiar; i++)
@@ -99,3 +99,21 @@ template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniow
 template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<double, 3> &UklRown);
 template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<double, 4> &UklRown);
 template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<double, 5> &UklRown);
+
+template class UkladRownanLiniowych<LZespolona, 1>;
+template class UkladRownanLiniowych<LZespolona, 2>;
+template class UkladRownanLiniowych<LZespolona, 3>;
+template class UkladRownanLiniowych<LZespolona, 4>;
+template class UkladRownanLiniowych<LZespolona, 5>;
+
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<LZespolona, 1> &UklRown);
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<LZespolona, 2> &UklRown);
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<LZespolona, 3> &UklRown);
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<LZespolona, 4> &UklRown);
+template std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<LZespolona, 5> &UklRown);
+
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<LZespolona, 1> &UklRown);
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<LZespolona, 2> &UklRown);
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<LZespolona, 3> &UklRown);
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<LZespolona, 4> &UklRown);
+template std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<LZespolona, 5> &UklRown);

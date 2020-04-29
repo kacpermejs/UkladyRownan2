@@ -21,7 +21,7 @@ class Wektor {
 
     Wektor<Typ, Rozmiar>();
 
-    Wektor<Typ, Rozmiar>(double x, double y, double z);
+    //Wektor<Typ, Rozmiar>(double x, double y, double z);
     //Wektor<Typ, Rozmiar>(Typ x,Typ y, Typ z);
     Wektor<Typ, Rozmiar>(Typ tablica[]);
 
@@ -37,7 +37,10 @@ class Wektor {
     inline const Wektor<Typ, Rozmiar> operator * (double l) const { return Wektor<Typ, Rozmiar>(*this)*=l; } // W1 * 2
     inline const Wektor<Typ, Rozmiar> operator / (double l) const { return Wektor<Typ, Rozmiar>(*this)/=l; } // W1 / 2
 
-    //double dlugosc() const; //modul
+    //mnozenie skalarne 2 wektorow
+    const Typ operator * (const Wektor<Typ, Rozmiar> W2) const;
+
+    const double dlugosc() const; //modul
 
     bool operator == (const Wektor<Typ, Rozmiar> & W2) const;
     bool operator != (const Wektor<Typ, Rozmiar> & W2) const;
@@ -46,7 +49,7 @@ class Wektor {
     inline Typ & operator[] (int index) { assert(index>=0 && index<Rozmiar); return this->Tab[index]; }
 };
 template<typename Typ, int Rozmiar>
-inline Wektor<Typ, Rozmiar> operator *(Typ l, Wektor<Typ, Rozmiar> W2) { return Wektor<Typ, Rozmiar>(W2)*l; }
+inline Wektor<Typ, Rozmiar> operator *(double l, Wektor<Typ, Rozmiar> W2) { return Wektor<Typ, Rozmiar>(W2)*l; }
 /*!
  * Funkcja do wczytywania obiektu klasy Wektor ze strumienia
  * Strm - strumien wyjsciowy

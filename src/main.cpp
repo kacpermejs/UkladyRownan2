@@ -20,38 +20,55 @@
 int main()
 {
 using namespace std;
-/*
-    UkladRownanLiniowych<double, ROZMIAR>   UklRown;   // To tylko przykladowe definicje zmiennej
-    Wektor<double, 3> WekRozwiazan;
-    Wektor<double, 3> WekBledow;
-    MacierzKw<double, 3> MacUkladu;
 
-    cin >> UklRown;
-    UklRown.zwroc_macierz().transponuj();
-    cout << UklRown;
-    MacUkladu=UklRown.macierz();
-    WekRozwiazan=UklRown.oblicz();
-    WekBledow=MacUkladu*WekRozwiazan-UklRown.wektor();
+    char typ;
+    cin >> typ;
+    if(typ=='r')
+    {
+        UkladRownanLiniowych<double, ROZMIAR>   UklRown;
+        Wektor<double, ROZMIAR> WekRozwiazan;
+        Wektor<double, ROZMIAR> WekBledow;
+        MacierzKw<double, ROZMIAR> MacUkladu;
 
-    cout << "Wynik: (x1, x2,x3)\n"
-    << WekRozwiazan << endl;
+        cin >> UklRown;
+        UklRown.zwroc_macierz().transponuj();
+        cout << UklRown;
+        MacUkladu=UklRown.macierz();
+        WekRozwiazan=UklRown.oblicz();
+        WekBledow=MacUkladu*WekRozwiazan-UklRown.wektor();
 
-    cout << "Wektor bledu:\n"
-    << WekBledow << endl;
+        cout << "Wynik: (x1, x2,x3)\n"
+        << WekRozwiazan << endl;
 
-    cout << "Dlugosc wektora bledu:\n"
-    << WekBledow.dlugosc() << endl;*/
-    Wektor<LZespolona, 3> w1;
+        cout << "Wektor bledu:\n"
+        << WekBledow << endl;
 
-    cin >> w1;
+        cout << "Dlugosc wektora bledu:\n"
+        << WekBledow.dlugosc() << endl;
+    }
+    else if(typ=='z')
+    {
+        UkladRownanLiniowych<LZespolona, ROZMIAR>   UklRown;
+        Wektor<LZespolona, ROZMIAR> WekRozwiazan;
+        Wektor<LZespolona, ROZMIAR> WekBledow;
+        MacierzKw<LZespolona, ROZMIAR> MacUkladu;
 
-    cout << w1;
+        cin >> UklRown;
+        UklRown.zwroc_macierz().transponuj();
+        cout << UklRown;
+        MacUkladu=UklRown.macierz();
+        WekRozwiazan=UklRown.oblicz();
+        WekBledow=MacUkladu*WekRozwiazan-UklRown.wektor();
 
+        cout << "Wynik: (x1, x2,x3)\n"
+        << WekRozwiazan << endl;
 
+        cout << "Wektor bledu:\n"
+        << WekBledow << endl;
 
-
-
-
+        cout << "Dlugosc wektora bledu:\n"
+        << WekBledow.dlugosc() << endl;
+    }
 }
 
 

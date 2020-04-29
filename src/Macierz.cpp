@@ -1,5 +1,6 @@
 #include "Macierz.hh"
 
+
 template<typename Typ, int Rozmiar>
 MacierzKw<Typ, Rozmiar>::MacierzKw()
 {
@@ -24,10 +25,10 @@ MacierzKw<Typ, Rozmiar>::MacierzKw(Wektor<Typ, Rozmiar> A, Wektor B, Wektor C)
 }*/
 
 template<typename Typ, int Rozmiar>
-const double MacierzKw<Typ, Rozmiar>::wyznacznikSarrus() //tylko dla 3x3
+const Typ MacierzKw<Typ, Rozmiar>::wyznacznikSarrus() //tylko dla 3x3
 {
     assert(Rozmiar==3);
-    double Wynik;
+    Typ Wynik;
 
     return Wynik=(*this)(0,0) * (*this)(1,1) * (*this)(2,2)
                 +(*this)(0,1) * (*this)(1,2) * (*this)(2,0)
@@ -41,9 +42,10 @@ const double MacierzKw<Typ, Rozmiar>::wyznacznikSarrus() //tylko dla 3x3
 }
 
 template<typename Typ, int Rozmiar>
-const double MacierzKw<Typ, Rozmiar>::wyznacznikLaplace()
+const Typ MacierzKw<Typ, Rozmiar>::wyznacznikLaplace()
 {
-    return 0; //nie działa bo nie działa rekurencja z szablonami.
+    Typ Wynik(0);
+    return Wynik; //nie działa bo nie działa rekurencja z szablonami.
               //Proba implementacji na dole w komentarzu.
 }
 /*
@@ -86,18 +88,18 @@ const double MacierzKw<Typ, Rozmiar>::wyznacznikLaplace()
 }*/
 
 template<typename Typ, int Rozmiar>
-const double MacierzKw<Typ, Rozmiar>::wyznacznikGauss()
+const Typ MacierzKw<Typ, Rozmiar>::wyznacznikGauss()
 {
-    double det = 1;
+    Typ det(1);
     MacierzKw<Typ, Rozmiar> Temp=(*this);
     for (int i = 0; i < Rozmiar; ++i)
     {
 
-        double Element = Temp(i,i);
+        Typ Element = Temp(i,i);
         int przekatna = i;
         for (int kolumna = i + 1; kolumna < Rozmiar; ++kolumna)
         {
-            if (std::abs(Temp(i,kolumna)) > std::abs(Element))
+            if (AbsV(Temp(i,kolumna)) > AbsV(Element))
             {
                 Element = Temp(i, kolumna);
                 przekatna = kolumna;
@@ -105,7 +107,8 @@ const double MacierzKw<Typ, Rozmiar>::wyznacznikGauss()
         }
         if (Element == 0)
         {
-            return 0;
+            det = 0;
+            return det;
         }
         if (przekatna != i)
         {
@@ -127,8 +130,9 @@ const double MacierzKw<Typ, Rozmiar>::wyznacznikGauss()
 }
 
 template<typename Typ, int Rozmiar>
-const double MacierzKw<Typ, Rozmiar>::wyznacznik(metoda met)
+const Typ MacierzKw<Typ, Rozmiar>::wyznacznik(metoda met)
 {
+    Typ det(0);
     switch(met)
     {
     case LAPLACE:
@@ -148,7 +152,7 @@ const double MacierzKw<Typ, Rozmiar>::wyznacznik(metoda met)
     }
     default:
     {
-    return 0;
+    return det;
     break;
     }
     }
@@ -204,7 +208,7 @@ MacierzKw<Typ, Rozmiar> & MacierzKw<Typ, Rozmiar>::operator-=(const MacierzKw<Ty
 }
 
 template<typename Typ, int Rozmiar>
-MacierzKw<Typ, Rozmiar> & MacierzKw<Typ, Rozmiar>::operator*=(Typ l)
+MacierzKw<Typ, Rozmiar> & MacierzKw<Typ, Rozmiar>::operator*=(double l)
 {
     for(int i=0; i < Rozmiar; i++)
         (*this)[i]*=l;
@@ -221,20 +225,19 @@ const Wektor<Typ, Rozmiar> MacierzKw<Typ, Rozmiar>::zwrocWiersz(int index) const
     return Wynik;
 }
 
-//================================================================================
-
 template<typename Typ, int Rozmiar>
-Wektor<Typ, Rozmiar> operator*(const MacierzKw<Typ, Rozmiar> & M1, const Wektor<Typ, Rozmiar>& W2)
+Wektor<Typ, Rozmiar> MacierzKw<Typ, Rozmiar>::operator*(const Wektor<Typ, Rozmiar>& W2) const
 {
     Wektor<Typ, Rozmiar> Wynik;
 
     for(int i=0; i < Rozmiar; i++)
         for(int k=0; k < Rozmiar; k++)
         {
-            Wynik[i]+=M1(i,k)*W2[k];
+            Wynik[i]+=(*this)(i,k)*W2[k];
         }
     return Wynik;
 }
+//==========================================================================================================
 
 template<typename Typ, int Rozmiar>
 std::istream& operator >> (std::istream &Strm, MacierzKw<Typ, Rozmiar> &Mac)
@@ -281,12 +284,23 @@ template std::ostream& operator << (std::ostream &Strm, const MacierzKw<double, 
 template std::ostream& operator << (std::ostream &Strm, const MacierzKw<double, 4> &Mac);
 template std::ostream& operator << (std::ostream &Strm, const MacierzKw<double, 5> &Mac);
 
-template Wektor<double, 1> operator*(const MacierzKw<double, 1> & M1, const Wektor<double, 1>& W2);
-template Wektor<double, 2> operator*(const MacierzKw<double, 2> & M1, const Wektor<double, 2>& W2);
-template Wektor<double, 3> operator*(const MacierzKw<double, 3> & M1, const Wektor<double, 3>& W2);
-template Wektor<double, 4> operator*(const MacierzKw<double, 4> & M1, const Wektor<double, 4>& W2);
-template Wektor<double, 5> operator*(const MacierzKw<double, 5> & M1, const Wektor<double, 5>& W2);
+template class MacierzKw<LZespolona, 1>;
+template class MacierzKw<LZespolona, 2>;
+template class MacierzKw<LZespolona, 3>;
+template class MacierzKw<LZespolona, 4>;
+template class MacierzKw<LZespolona, 5>;
 
+template std::istream& operator >> (std::istream &Strm, MacierzKw<LZespolona, 1> &Mac);
+template std::istream& operator >> (std::istream &Strm, MacierzKw<LZespolona, 2> &Mac);
+template std::istream& operator >> (std::istream &Strm, MacierzKw<LZespolona, 3> &Mac);
+template std::istream& operator >> (std::istream &Strm, MacierzKw<LZespolona, 4> &Mac);
+template std::istream& operator >> (std::istream &Strm, MacierzKw<LZespolona, 5> &Mac);
+
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<LZespolona, 1> &Mac);
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<LZespolona, 2> &Mac);
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<LZespolona, 3> &Mac);
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<LZespolona, 4> &Mac);
+template std::ostream& operator << (std::ostream &Strm, const MacierzKw<LZespolona, 5> &Mac);
 
 
 

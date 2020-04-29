@@ -17,11 +17,11 @@
  * Modeluje pojecie liczby zespolonej
  */
 class LZespolona {
-
+public:
   double re;    /*! Pole repezentuje czesc rzeczywista. */
   double im;    /*! Pole repezentuje czesc urojona. */
 
-public:
+
     LZespolona()
     {
         this->re = 0;
@@ -76,10 +76,14 @@ public:
 
     bool operator != (LZespolona Skl2)const;
 
-    const double& zwrocREc() const {return re;}
-    double& zwrocRE() {return re;}
-    const double& zwrocIMc() const {return im;}
-    double& zwrocIM() {return im;}
+    bool operator == (double Skl2)const;
+
+    bool operator != (double Skl2)const;
+
+    const double getRE() const {return (*this).re;}
+    void setRE(double rzeczywista) {(*this).re=rzeczywista;}
+    const double getIM() const {return (*this).im;}
+    void setIM(double urojona) {(*this).im=urojona;}
 
 };
 

@@ -117,17 +117,27 @@ LZespolona LZespolona::operator /= (const double rzeczywista)
 //==========================================================================================
 bool LZespolona::operator == (LZespolona Skl2) const
 {
-  if(
-      ( (*this).re + EPSILON == Skl2.re || (*this).re - EPSILON == Skl2.re)
-      &&
-      ( (*this).im + EPSILON == Skl2.im || (*this).im - EPSILON == Skl2.im)
-    )
+  if(std::abs((*this).re - Skl2.re) < EPSILON && std::abs((*this).re - Skl2.re) < EPSILON)
     return true;
   else
     return false;
 }
 
 bool LZespolona::operator != (LZespolona Skl2) const
+{
+  return !((*this)==Skl2);
+}
+
+bool LZespolona::operator == (double Skl2) const
+{
+  if(std::abs((*this).re - Skl2) < EPSILON && std::abs((*this).re - Skl2) < EPSILON 
+    && std::abs((*this).im)<EPSILON )
+    return true;
+  else
+    return false;
+}
+
+bool LZespolona::operator != (double Skl2) const
 {
   return !((*this)==Skl2);
 }
@@ -146,9 +156,14 @@ std::istream & operator >> (std::istream & strm, LZespolona & Skl)
 {
   char znak;
   strm>>znak;
+
+  double rzeczywista, urojona;
+
   if (znak != '(')
     strm.setstate(std::ios::failbit);
-  strm>>Skl.zwrocRE()>>Skl.zwrocIM()>>znak;
+  strm>>rzeczywista>>urojona>>znak;
+  Skl.setRE(rzeczywista);
+  Skl.setIM(urojona);
   if (znak != 'i')
     strm.setstate(std::ios::failbit);
   strm>>znak;
@@ -159,8 +174,7 @@ std::istream & operator >> (std::istream & strm, LZespolona & Skl)
 
 std::ostream & operator << (std::ostream & strm, const LZespolona & Skl)
 {
-  strm << '(' << Skl.zwrocREc() << std::showpos << Skl.zwrocIMc() << std::noshowpos << "i)";
+  strm << '(' << Skl.getRE() << std::showpos << Skl.getIM() << std::noshowpos << "i)";
   return strm;
 }
-
 
