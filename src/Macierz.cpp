@@ -50,17 +50,11 @@ const Typ MacierzKw<Typ, Rozmiar>::wyznacznikLaplace()
 }
 /*
 template<typename Typ, int Rozmiar>
-const double MacierzKw<Typ, Rozmiar>::wyznacznikLaplace()
+const Typ MacierzKw<Typ, Rozmiar>::wyznacznikLaplace()
 {
-    double Wynik=0;
+    Typ Wynik(0);
     double m=1;
     int k;
-
-    if(Rozmiar>6)
-    {
-        std::cerr << "Nie obslugiwana wielkosc" << std::endl;
-        return 0;
-    }
 
     MacierzKw<Typ, Rozmiar-1> Temp;
 
@@ -79,7 +73,7 @@ const double MacierzKw<Typ, Rozmiar>::wyznacznikLaplace()
                     Temp(l,j)=(*this)(l,k++);
             }
 
-            Wynik+=m*(*this)(0, i)*Temp.wyznacznikLaplace();
+            Wynik+=(*this)(0, i)*Temp.wyznacznikLaplace()*m;
             m*=(-1);
         }
 

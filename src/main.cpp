@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include "Wektor.hh"
 #include "Macierz.hh"
 #include "UkladRownanLiniowych.hh"
@@ -55,14 +56,22 @@ using namespace std;
 
         cin >> UklRown;
         UklRown.zwroc_macierz().transponuj();
+        cout << fixed << setprecision(2);
         cout << UklRown;
         MacUkladu=UklRown.macierz();
         WekRozwiazan=UklRown.oblicz();
         WekBledow=MacUkladu*WekRozwiazan-UklRown.wektor();
 
-        cout << "Wynik: (x1, x2,x3)\n"
-        << WekRozwiazan << endl;
-
+        cout << "Wynik: (";
+        for(int i=1; i<=ROZMIAR; ++i)
+        {
+            cout << "x" << i;
+            if(i!=ROZMIAR)
+                cout << ", ";
+        }
+        cout << ") :\n" << WekRozwiazan << endl;
+        
+        cout << scientific << setprecision(1);
         cout << "Wektor bledu:\n"
         << WekBledow << endl;
 
